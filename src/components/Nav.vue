@@ -8,6 +8,9 @@
 
 <script lang="ts">
 import Vue from "vue";
+import y from "@/assets/icnos/label.svg";
+
+console.log(y);
 
 export default Vue.extend({});
 </script>
