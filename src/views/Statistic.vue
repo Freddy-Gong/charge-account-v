@@ -1,7 +1,6 @@
 <template>
   <div>
-    Statistic
-    <Nav />
+    <Layout>Statistic</Layout>
   </div>
 </template>
 

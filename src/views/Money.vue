@@ -1,7 +1,6 @@
 <template>
   <div class="nav-wrapper">
-    <div class="content">Money</div>
-    <Nav />
+    <Layout>Money</Layout>
   </div>
 </template>
 
@@ -13,14 +12,5 @@ export default Vue.extend({
 });
 </script>
 
-<style lang='scss'scoped>
-.nav-wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
-.content {
-  flex-grow: 1;
-}
+<style lang='scss' scoped>
 </style>

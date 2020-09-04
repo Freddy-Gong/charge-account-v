@@ -1,15 +1,23 @@
 <template>
   <div class="nav">
-    <router-link to="/money">记账</router-link>|
-    <router-link to="/labels">标签</router-link>|
-    <router-link to="/Statistic">统计</router-link>
+    <router-link to="/money">
+      <Icon name="money" />记账
+    </router-link>|
+    <router-link to="/labels">
+      <Icon name="tag" />标签
+    </router-link>|
+    <router-link to="/Statistic">
+      <Icon name="statistic" />统计
+    </router-link>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 
-export default Vue.extend({});
+export default Vue.extend({
+  name: "Nav",
+});
 </script>
 
 <style lang='scss' scoped>
