@@ -1358,6 +1358,13 @@
   resolved "https://registry.npm.taobao.org/@types/strip-json-comments/download/@types/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha1-mqMMBNshKpoGSdaub9UKzMQHSKE=
 
+"@types/svg-sprite-loader@^3.9.2":
+  version "3.9.2"
+  resolved "https://registry.npm.taobao.org/@types/svg-sprite-loader/download/@types/svg-sprite-loader-3.9.2.tgz#967ddfa23317e33d1c32a7d7ae7d785f96bcb7f9"
+  integrity sha1-ln3fojMX4z0cMqfXrn14X5a8t/k=
+  dependencies:
+    "@types/webpack" "*"
+
 "@types/tapable@*":
   version "1.0.6"
   resolved "https://registry.npm.taobao.org/@types/tapable/download/@types/tapable-1.0.6.tgz#a9ca4b70a18b270ccb2bc0aaafefd1d486b7ea74"
@@ -5502,7 +5509,11 @@ ignore@^5.1.1:
 
 image-size@^0.5.1:
   version "0.5.5"
+<<<<<<< HEAD
   resolved "https://registry.npm.taobao.org/image-size/download/image-size-0.5.5.tgz?cache=0&sync_timestamp=1599125214404&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fimage-size%2Fdownload%2Fimage-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
+=======
+  resolved "https://registry.npm.taobao.org/image-size/download/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
+>>>>>>> e7c81df416c53d26f4da5815957b9d3cad051873
   integrity sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
 
 import-cwd@^2.0.0:
@@ -9868,6 +9879,7 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+<<<<<<< HEAD
 svg-baker-runtime@^1.4.7:
   version "1.4.7"
   resolved "https://registry.npm.taobao.org/svg-baker-runtime/download/svg-baker-runtime-1.4.7.tgz#f4720637f5b6202eef6378d81f1fead0815f8a4e"
@@ -9878,6 +9890,18 @@ svg-baker-runtime@^1.4.7:
     svg-baker "^1.7.0"
 
 svg-baker@^1.5.0, svg-baker@^1.7.0:
+=======
+svg-baker-runtime@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/svg-baker-runtime/download/svg-baker-runtime-1.4.1.tgz#d3f77dffdf1f1a8b8f1e84ef67d2c1b53d60d770"
+  integrity sha1-0/d9/98fGouPHoTvZ9LBtT1g13A=
+  dependencies:
+    deepmerge "1.3.2"
+    mitt "1.1.2"
+    svg-baker "^1.4.0"
+
+svg-baker@^1.4.0, svg-baker@^1.4.1:
+>>>>>>> e7c81df416c53d26f4da5815957b9d3cad051873
   version "1.7.0"
   resolved "https://registry.npm.taobao.org/svg-baker/download/svg-baker-1.7.0.tgz#8367f78d875550c52fe4756f7303d5c5d7c2e9a7"
   integrity sha1-g2f3jYdVUMUv5HVvcwPVxdfC6ac=
@@ -9896,10 +9920,17 @@ svg-baker@^1.5.0, svg-baker@^1.7.0:
     query-string "^4.3.2"
     traverse "^0.6.6"
 
+<<<<<<< HEAD
 svg-sprite-loader@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npm.taobao.org/svg-sprite-loader/download/svg-sprite-loader-5.0.0.tgz#fd5c63c7110df3ca289282def49f34e6a62e6f65"
   integrity sha1-/VxjxxEN88ookoLe9J805qYub2U=
+=======
+svg-sprite-loader@4.1.6:
+  version "4.1.6"
+  resolved "https://registry.npm.taobao.org/svg-sprite-loader/download/svg-sprite-loader-4.1.6.tgz#ca03d51201e326c1c018389c81d5b0eb78dc01de"
+  integrity sha1-ygPVEgHjJsHAGDicgdWw63jcAd4=
+>>>>>>> e7c81df416c53d26f4da5815957b9d3cad051873
   dependencies:
     bluebird "^3.5.0"
     deepmerge "1.3.2"
@@ -9907,8 +9938,13 @@ svg-sprite-loader@^5.0.0:
     escape-string-regexp "1.0.5"
     html-webpack-plugin "^3.2.0"
     loader-utils "^1.1.0"
+<<<<<<< HEAD
     svg-baker "^1.5.0"
     svg-baker-runtime "^1.4.7"
+=======
+    svg-baker "^1.4.1"
+    svg-baker-runtime "1.4.1"
+>>>>>>> e7c81df416c53d26f4da5815957b9d3cad051873
     url-slug "2.0.0"
 
 svg-tags@^1.0.0:
