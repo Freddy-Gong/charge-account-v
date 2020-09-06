@@ -3,7 +3,7 @@
     <NumberPad />
     <Types />
     <Notes />
-    <Tags :data-source="tags" />
+    <Tags :data-source="tags" v-on:update:data-source="tags=$event" />
   </Layout>
 </template>
 

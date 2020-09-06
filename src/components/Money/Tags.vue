@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
     <ul class="current">
       <li
@@ -27,6 +27,14 @@ export default class Tags extends Vue {
       this.selectedTags.splice(index, 1);
     } else {
       this.selectedTags.push(tag);
+    }
+  }
+  create() {
+    const name = window.prompt("请输入签名");
+    if (name === "") {
+      window.alert("签名不能为空");
+    } else if (this.dataSource) {
+      this.$emit("update:data-source", [...this.dataSource, name]); //不能改外部数据
     }
   }
 }
