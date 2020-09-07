@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="layout">
     {{record}}
-    <NumberPad :value.sync="record.amount" />
+    <NumberPad :value.sync="record.amount" @submit="saveRecord" />
     <Types :value.sync="record.types" />
     <Notes @update:value="onUpdateNotes" />
     <Tags :data-source="tags" v-on:update:data-source="tags=$event" @update:value="onUpdateTags" />
@@ -14,7 +14,7 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 
 type Record = {
   tags: string[];
@@ -28,12 +28,22 @@ type Record = {
 })
 export default class Money extends Vue {
   tags = ["衣", "食", "住", "行"];
+  recordList: Record[] = [];
   record: Record = { tags: [], notes: "", types: "-", amount: 0 };
   onUpdateTags(tags: string[]) {
     this.record.tags = tags;
   }
   onUpdateNotes(note: string) {
     this.record.notes = note;
+  }
+  saveRecord() {
+    const deepClone = JSON.parse(JSON.stringify(this.record));
+    //深拷贝
+    this.recordList.push(deepClone); //record是一个对象，这样赋值传的是一个引用。
+  }
+  @Watch("recordList")
+  onUpdateRecord() {
+    window.localStorage.setItem("recordList", JSON.stringify(this.recordList));
   }
 }
 </script>
