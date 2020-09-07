@@ -13,7 +13,7 @@
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button class="ok">OK</button>
+      <button @click="ok" class="ok">OK</button>
       <button class="zero" @click="inputContent">0</button>
       <button @click="inputContent">.</button>
     </div>
@@ -22,11 +22,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class NumberPad extends Vue {
-  output = "0";
+  @Prop() readonly value!: number;
+  output = this.value.toString();
   inputContent(e: MouseEvent) {
     const button = e.target as HTMLButtonElement;
     const text = button.textContent as string; // ! 把空排除
@@ -56,6 +57,10 @@ export default class NumberPad extends Vue {
     this.output = this.output.slice(0, -1);
   }
   clear() {
+    this.output = "0";
+  }
+  ok() {
+    this.$emit("update:value", this.output);
     this.output = "0";
   }
 }

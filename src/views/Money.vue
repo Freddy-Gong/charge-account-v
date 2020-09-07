@@ -1,26 +1,41 @@
 <template>
   <Layout class-prefix="layout">
-    <NumberPad />
-    <Types />
-    <Notes />
-    <Tags :data-source="tags" v-on:update:data-source="tags=$event" />
+    {{record}}
+    <NumberPad :value.sync="record.amount" />
+    <Types :value.sync="record.types" />
+    <Notes @update:value="onUpdateNotes" />
+    <Tags :data-source="tags" v-on:update:data-source="tags=$event" @update:value="onUpdateTags" />
   </Layout>
 </template>
 
-<script >
+<script lang="ts">
+import Vue from "vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
-export default {
-  name: "Money",
-  components: { Tags, Notes, Types, NumberPad },
-  data() {
-    return {
-      tags: ["衣", "食", "住", "行"],
-    };
-  },
+import { Component } from "vue-property-decorator";
+
+type Record = {
+  tags: string[];
+  notes: string;
+  types: "-" | "+";
+  amount: number;
 };
+
+@Component({
+  components: { Tags, Notes, Types, NumberPad },
+})
+export default class Money extends Vue {
+  tags = ["衣", "食", "住", "行"];
+  record: Record = { tags: [], notes: "", types: "-", amount: 0 };
+  onUpdateTags(tags: string[]) {
+    this.record.tags = tags;
+  }
+  onUpdateNotes(note: string) {
+    this.record.notes = note;
+  }
+}
 </script>
 
 <style lang="scss">

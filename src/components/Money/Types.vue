@@ -9,16 +9,20 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Types extends Vue {
-  type: "-" | "+" = "-";
+  @Prop() readonly type!: "-" | "+";
   //@Prop(Number) xxx: number | undefined; //左边是传值的类型，右边的是对其操作的时候的检查
   //左边告诉Vue 运行时 右边告诉TS 编译时
   selectType(type: "-" | "+") {
-    this.type = type;
+    this.$emit("update:value", type);
   }
+  // @Watch("type") //WATCH类似于useEffect(()=>{},[type])
+  // onTypeChanged(type: "-" | "+") {
+  //   this.$emit("update:value", type);
+  // }
 }
 // export default {
 //   name: "Types",
