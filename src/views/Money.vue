@@ -15,7 +15,9 @@ import Types from "@/components/Money/Types.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
-import model from "@/model.ts";
+import model from "@/models/model.ts";
+import tagModel from "@/models/tagListModels.ts";
+
 export type RecordItem = {
   tags: string[];
   notes: string;
@@ -36,11 +38,13 @@ if (version === "0.0.1") {
 }
 window.localStorage.setItem("version", "0.0.2");
 
+const tagList = tagModel.fetch();
+
 @Component({
   components: { Tags, Notes, Types, NumberPad },
 })
 export default class Money extends Vue {
-  tags = ["衣", "食", "住", "行"];
+  tags = tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = { tags: [], notes: "", types: "-", amount: 0 };
   onUpdateTags(tags: string[]) {
