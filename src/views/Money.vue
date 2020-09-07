@@ -16,11 +16,28 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
 
+const version = window.localStorage.getItem("version") || "0";
+const recordList: Record[] = JSON.parse(
+  window.localStorage.getItem("recordList") || "[]"
+);
+
+if (version === "0.0.1") {
+  //数据库升级，数据迁移
+  recordList.forEach((record) => {
+    record.createAt = new Date(2020, 0, 1);
+  });
+  // 保存数据
+  window.localStorage.setItem("recordList", JSON.stringify(recordList));
+}
+
+window.localStorage.setItem("version", "0.0.2");
+
 type Record = {
   tags: string[];
   notes: string;
   types: "-" | "+";
   amount: number;
+  createAt?: Date | undefined; //类型这里除了可以写一个类型，还可以写一个类（构造函数）
 };
 
 @Component({
@@ -28,7 +45,9 @@ type Record = {
 })
 export default class Money extends Vue {
   tags = ["衣", "食", "住", "行"];
-  recordList: Record[] = [];
+  recordList: Record[] = JSON.parse(
+    window.localStorage.getItem("recordList") || "[]"
+  );
   record: Record = { tags: [], notes: "", types: "-", amount: 0 };
   onUpdateTags(tags: string[]) {
     this.record.tags = tags;
@@ -37,8 +56,9 @@ export default class Money extends Vue {
     this.record.notes = note;
   }
   saveRecord() {
-    const deepClone = JSON.parse(JSON.stringify(this.record));
+    const deepClone: Record = JSON.parse(JSON.stringify(this.record));
     //深拷贝
+    deepClone.createAt = new Date();
     this.recordList.push(deepClone); //record是一个对象，这样赋值传的是一个引用。
   }
   @Watch("recordList")
