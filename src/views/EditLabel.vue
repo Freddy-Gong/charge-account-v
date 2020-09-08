@@ -1,13 +1,13 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon name="right" />
+      <Icon name="right" @click.native="goback" />
       <span class="title">编辑标签</span>
       <Icon name="right" />
     </div>
 
-    <Notes filedName="备注" place-holder="在这里输入备注" />
-    <Button>删除标签</Button>
+    <Notes :value="this.tag.name" @update:value="updateTag" filedName="备注" place-holder="在这里输入备注" />
+    <Button @click.native="deleteTag">删除标签</Button>
   </Layout>
 </template>
 
@@ -22,16 +22,30 @@ import Button from "@/components/Button.vue";
   components: { Notes, Button },
 })
 export default class EditLabel extends Vue {
+  tag?: { id: string; name: string } = undefined;
   created() {
     const id = this.$route.params.id;
     tagModel.fetch();
     const tags = tagModel.data;
     const tag = tags.filter((t) => t.id === id)[0];
     if (tag) {
-      console.log(tag);
+      this.tag = tag;
     } else {
       this.$router.replace("/404");
     }
+  }
+  updateTag(name: string) {
+    if (this.tag) {
+      tagModel.update(this.tag.id, name);
+    }
+  }
+  deleteTag() {
+    if (this.tag) {
+      tagModel.delete(this.tag.id);
+    }
+  }
+  goback() {
+    this.$router.back();
   }
 }
 </script>
