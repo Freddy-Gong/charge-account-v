@@ -1,5 +1,11 @@
 <template>
-  <Layout>bainianji</Layout>
+  <Layout>
+    <div>
+      <Icon name="right" />
+      <span>编辑标签</span>
+    </div>
+    <Notes filedName="标签名" placeholder="在这里输入签名" />
+  </Layout>
 </template>
 
 <script lang="ts">

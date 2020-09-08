@@ -3,7 +3,7 @@
     {{record}}
     <NumberPad :value.sync="record.amount" @submit="saveRecord" />
     <Types :value.sync="record.types" />
-    <Notes @update:value="onUpdateNotes" />
+    <Notes filedName="备注" @update:value="onUpdateNotes" placeHolder="在这里输入备注"/>
     <Tags :data-source="tags" v-on:update:data-source="tags=$event" @update:value="onUpdateTags" />
   </Layout>
 </template>
