@@ -1,7 +1,12 @@
 const LocalStorageKeyName = 'tagList'
+type Tag = {
+    id: string;
+    name: string;
+}
+
 type TagModel = {
-    data: string[];
-    fetch: () => string[];
+    data: Tag[];
+    fetch: () => Tag[];
     create: (name: string) => boolean;
     save: () => void;
 }
@@ -15,10 +20,11 @@ const tagModel: TagModel = {
         window.localStorage.setItem(LocalStorageKeyName, JSON.stringify(this.data))
     },
     create(name) {
-        if (this.data.indexOf(name) >= 0) {
+        const names = this.data.map(item => item.name)
+        if (names.indexOf(name) >= 0) {
             throw new Error('duplicated')
         }
-        this.data.push(name)
+        this.data.push({ id: name, name: name })
         this.save()
         return true
     }
