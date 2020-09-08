@@ -26,7 +26,7 @@ const routes: Array<RouteConfig> = [
     component: Statistic
   },
   {
-    path: '/labels/edit',
+    path: '/labels/edit/:id',//:id代表占位
     component: EditLabel
   },
   {
