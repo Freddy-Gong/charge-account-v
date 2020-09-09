@@ -16,7 +16,6 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
 import model from "@/models/model.ts";
-import tagModel from "@/models/tagListModels.ts";
 
 export type RecordItem = {
   tags: string[];
@@ -37,7 +36,6 @@ if (version === "0.0.1") {
   model.save();
 }
 window.localStorage.setItem("version", "0.0.2");
-
 
 @Component({
   components: { Tags, Notes, Types, NumberPad },

@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts">
-import tagModel from "@/models/tagListModels";
 import Vue from "vue";
 import Notes from "@/components/Money/Notes.vue";
 import { Component } from "vue-property-decorator";
@@ -22,26 +21,20 @@ import Button from "@/components/Button.vue";
   components: { Notes, Button },
 })
 export default class EditLabel extends Vue {
-  tag?: { id: string; name: string } = undefined;
+  tag = window.find(this.$route.params.id);
   created() {
-    const id = this.$route.params.id;
-    tagModel.fetch();
-    const tags = tagModel.data;
-    const tag = tags.filter((t) => t.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
+    if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   updateTag(name: string) {
     if (this.tag) {
-      tagModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);
     }
   }
   deleteTag() {
     if (this.tag) {
-      if (tagModel.delete(this.tag.id)) {
+      if (window.removeTag(this.tag.id)) {
         this.$router.back();
       } else {
         window.alert("伤处失败");
