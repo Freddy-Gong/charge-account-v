@@ -1,19 +1,7 @@
 import createID from '@/components/lib/idcreater'
 
 const LocalStorageKeyName = 'tagList'
-type Tag = {
-    id: string;
-    name: string;
-}
 
-type TagModel = {
-    data: Tag[];
-    fetch: () => Tag[];
-    create: (name: string) => boolean;
-    save: () => void;
-    update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
-    delete: (id: string) => boolean;
-}
 const tagModel: TagModel = {
     data: [],
     fetch() {

@@ -1,16 +1,24 @@
+import clone from '@/components/lib/Clone'
 
 const LocalStorageKeyName = 'recordList'
+
+
 const model = {
+    data: [] as RecordItem[],
     fetch() {
-        return JSON.parse(
+        this.data = JSON.parse(
             window.localStorage.getItem(LocalStorageKeyName) || "[]"
-        ) as RecordItem[]
+        )
+        return this.data
     },
-    save(data: RecordItem[]) {
-        window.localStorage.setItem("recordList", JSON.stringify(data))
+    save() {
+        window.localStorage.setItem("recordList", JSON.stringify(this.data))
     },
-    clone(data: RecordItem[] | RecordItem) {
-        return JSON.parse(JSON.stringify(data))
+    create(record: RecordItem) {
+        const deepClone = clone(record);
+        //深拷贝
+        deepClone.createAt = new Date();
+        this.data.push(deepClone);
     }
 }
 export default model

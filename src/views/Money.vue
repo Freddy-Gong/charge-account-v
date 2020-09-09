@@ -3,7 +3,7 @@
     {{record}}
     <NumberPad :value.sync="record.amount" @submit="saveRecord" />
     <Types :value.sync="record.types" />
-    <Notes filedName="备注" @update:value="onUpdateNotes" placeHolder="在这里输入备注"/>
+    <Notes filedName="备注" @update:value="onUpdateNotes" placeholder="在这里输入备注" />
     <Tags :data-source="tags" v-on:update:data-source="tags=$event" @update:value="onUpdateTags" />
   </Layout>
 </template>
@@ -34,17 +34,16 @@ if (version === "0.0.1") {
     record.createAt = new Date(2020, 0, 1);
   });
   // 保存数据
-  model.save(recordList);
+  model.save();
 }
 window.localStorage.setItem("version", "0.0.2");
 
-const tagList = tagModel.fetch();
 
 @Component({
   components: { Tags, Notes, Types, NumberPad },
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = { tags: [], notes: "", types: "-", amount: 0 };
   onUpdateTags(tags: string[]) {
@@ -54,14 +53,11 @@ export default class Money extends Vue {
     this.record.notes = note;
   }
   saveRecord() {
-    const deepClone = model.clone(this.record);
-    //深拷贝
-    deepClone.createAt = new Date();
-    this.recordList.push(deepClone); //record是一个对象，这样赋值传的是一个引用。
+    model.create(this.record); //record是一个对象，这样赋值传的是一个引用。
   }
   @Watch("recordList")
   onUpdateRecord() {
-    model.save(this.recordList);
+    model.save();
   }
 }
 </script>
