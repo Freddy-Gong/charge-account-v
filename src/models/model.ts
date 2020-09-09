@@ -19,6 +19,7 @@ const model = {
         //深拷贝
         deepClone.createAt = new Date();
         this.data.push(deepClone);
+        this.save()
     }
 }
 export default model
