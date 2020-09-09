@@ -16,12 +16,13 @@ import Vue from "vue";
 import Notes from "@/components/Money/Notes.vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
+import store from "@/store/index2.ts";
 
 @Component({
   components: { Notes, Button },
 })
 export default class EditLabel extends Vue {
-  tag = window.find(this.$route.params.id);
+  tag = store.find(this.$route.params.id);
   created() {
     if (!this.tag) {
       this.$router.replace("/404");
@@ -29,12 +30,12 @@ export default class EditLabel extends Vue {
   }
   updateTag(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
   deleteTag() {
     if (this.tag) {
-      if (window.removeTag(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         this.$router.back();
       } else {
         window.alert("伤处失败");

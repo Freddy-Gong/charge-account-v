@@ -14,13 +14,16 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Notes extends Vue {
   @Prop({ default: "" }) readonly value!: string;
   @Prop({ required: true }) filedName!: string;
   @Prop() placeHolder?: string;
+  onValueChanged(value: InputEvent) {
+    this.$emit("update:value", value);
+  }
 }
 </script>
 

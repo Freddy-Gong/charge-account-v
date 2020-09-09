@@ -16,6 +16,7 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component } from "vue-property-decorator";
 import model from "@/models/model.ts";
+import store from "@/store/index2.ts";
 
 export type RecordItem = {
   tags: string[];
@@ -27,7 +28,7 @@ export type RecordItem = {
 const version = window.localStorage.getItem("version") || "0";
 if (version === "0.0.1") {
   //数据库升级，数据迁移
-  window.recordList.forEach((record) => {
+  store.recordList.forEach((record) => {
     record.createAt = new Date(2020, 0, 1);
   });
   // 保存数据
@@ -39,8 +40,8 @@ window.localStorage.setItem("version", "0.0.2");
   components: { Tags, Notes, Types, NumberPad },
 })
 export default class Money extends Vue {
-  tags = window.tagList;
-  recordList = window.recordList;
+  tags = store.tagList;
+  recordList = store.recordList;
   record: RecordItem = { tags: [], notes: "", types: "-", amount: 0 };
   onUpdateTags(tags: string[]) {
     this.record.tags = tags;
@@ -49,7 +50,7 @@ export default class Money extends Vue {
     this.record.notes = note;
   }
   saveRecord() {
-    window.createRecord(this.record); //record是一个对象，这样赋值传的是一个引用。
+    store.createRecord(this.record); //record是一个对象，这样赋值传的是一个引用。
   }
 }
 </script>
