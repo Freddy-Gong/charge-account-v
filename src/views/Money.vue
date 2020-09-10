@@ -23,13 +23,13 @@ export type RecordItem = {
   notes: string;
   types: "-" | "+";
   amount: number;
-  createAt?: Date | undefined; //类型这里除了可以写一个类型，还可以写一个类（构造函数）
+  createAt?: string | undefined; //类型这里除了可以写一个类型，还可以写一个类（构造函数）
 };
 const version = window.localStorage.getItem("version") || "0";
 if (version === "0.0.1") {
   //数据库升级，数据迁移
   store.recordList.forEach((record) => {
-    record.createAt = new Date(2020, 0, 1);
+    record.createAt = new Date(2020, 0, 1).toISOString();
   });
   // 保存数据
   model.save();

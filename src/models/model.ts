@@ -17,7 +17,7 @@ const model = {
     create(record: RecordItem) {
         const deepClone = clone(record);
         //深拷贝
-        deepClone.createAt = new Date();
+        deepClone.createAt = new Date().toISOString();
         this.data.push(deepClone);
         this.save()
     }
